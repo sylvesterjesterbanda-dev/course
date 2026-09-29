@@ -5,9 +5,16 @@ const listDisplay = document.getElementById("list-display");
 function add() {
     const todoText = inputSpace.value
     const newItem = document.createElement("li")
+    newItem.addEventListener("click",function() {
+        newItem.remove()
+        
+    })
     newItem.textContent = todoText;
     listDisplay.appendChild(newItem)
     inputSpace.value = ""
+    
+    
+
 }
 
 addButton.addEventListener("click", function(){

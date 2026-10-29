@@ -3,29 +3,59 @@ const addButton = document.getElementById("add-button");
 const listDisplay = document.getElementById("list-display");
 
 function add() {
-  console.log("test");
-
   const todoText = inputSpace.value;
-  const newItem = document.createElement("li");
+  const newListItem = document.createElement("li");
+  const todoTextSpan = document.createElement("span");
+  const deleteButton = document.createElement("button");
+  const editButton = document.createElement("button");
 
-  newItem.addEventListener("click", function () {
-    if (newItem.style.textDecoration === "") {
-      newItem.style.textDecoration = "line-through";
+  todoTextSpan.addEventListener("click", function () {
+    if (todoTextSpan.style.textDecoration === "") {
+      todoTextSpan.style.textDecoration = "line-through";
     } else {
-      newItem.style.textDecoration = "";
+      todoTextSpan.style.textDecoration = "";
     }
   });
-  newItem.textContent = todoText;
-  listDisplay.appendChild(newItem);
+
+  todoTextSpan.textContent = todoText;
+  newListItem.appendChild(todoTextSpan);
+  listDisplay.appendChild(newListItem);
+
+  deleteButton.textContent = "Delete";
+  newListItem.appendChild(deleteButton);
+
+  editButton.textContent = "Edit";
+  newListItem.appendChild(editButton);
+
   inputSpace.value = "";
+
+  editButton.addEventListener("click", function () {
+    const answer = prompt("Edit your task:", todoTextSpan.textContent);
+
+    if (answer !== null) {
+      todoTextSpan.textContent = answer;
+    }
+  });
+
+  deleteButton.addEventListener("click", function () {
+    newListItem.remove();
+  });
 }
 
 addButton.addEventListener("click", function () {
-  add();
+  if (inputSpace.value === "") {
+    alert("you can not add an empty space");
+  } else {
+    add();
+  }
 });
 
-inputSpace.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    add();
+inputSpace.addEventListener("key", function (event) {
+  if (inputSpace.value === "") {
+    alert("you can not add an empty space");
+  } else {
+    if (event.key === "Enter") {
+      add();
+    }
   }
 });

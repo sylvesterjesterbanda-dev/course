@@ -50,11 +50,11 @@ addButton.addEventListener("click", function () {
   }
 });
 
-inputSpace.addEventListener("key", function (event) {
-  if (inputSpace.value === "") {
-    alert("you can not add an empty space");
-  } else {
-    if (event.key === "Enter") {
+inputSpace.addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+    if (inputSpace.value === "") {
+      alert("you can not add an empty space");
+    } else {
       add();
     }
   }
